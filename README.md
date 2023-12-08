@@ -42,7 +42,6 @@ The delivery boys can pick up the order from the food truck.
 The delivery boys can deliver orders to the customers.
 The delivery boys can check the order history. 
 
-
 TECHNOLOGIES:
 
 Programming language:  python 
@@ -52,6 +51,6 @@ Database : mysql
 Database server : mysql workbench
 UI:  HTML, CSS, bootstrap, javascript, jquery.
 	
-	In the process of this application development we are using python programming with flask library, for backend data storage purposes we are using the  mysql database that can store the data which are added by users. For UI designing  we are  using  html to design the login and registration pages , and website styling we use css styles, and bootstrap.
+In the process of this application development we are using python programming with flask library, for backend data storage purposes we are using the  mysql database that can store the data which are added by users. For UI designing  we are  using  html to design the login and registration pages , and website styling we use css styles, and bootstrap.
 
 
