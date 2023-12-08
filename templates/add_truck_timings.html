@@ -1,0 +1,99 @@
+{% include "fhead.html" %}
+<script>
+    $(document).ready(function() {
+        set_today();
+        get_timings();
+    });
+    function set_today(){
+        var date = new Date();
+        var day = date.getDate();
+        var month = date.getMonth() + 1;
+        var year = date.getFullYear();
+        if (month < 10) month = "0" + month;
+        if (day < 10) day = "0" + day;
+        var today = year + "-" + month + "-" + day;
+        $("#date").attr("value", today);
+    }
+    function get_timings(){
+        let date=$("#date").val();
+        $.get("http://127.0.0.1:5000/get_timings?date="+date, function(data, status){
+            $("#timings").html(data);
+        });
+
+    }
+    function add_timings(){
+        let from_time = $("#from_time").val();
+        let to_time = $("#to_time").val();
+        let date = $("#date1").val();
+        let location = $("#location").val();
+        console.log(from_time);
+        console.log(to_time);
+        console.log(date1);
+        console.log(location);
+        let timings = {
+            "from_time":from_time,
+            "to_time":to_time,
+            "date":date,
+            "location":location
+        }
+        $.post("http://127.0.0.1:5000/add_truck_timings_action",timings, function(data,status){
+            $("#message").html(data['message']);
+            $("#from_time").val("");
+            $("#to_time").val("");
+            $("#date1").val("");
+            $("#location").val("");
+            get_timings();
+        });
+        console.log(timings)
+
+         return false;
+    }
+</script>
+<div class="container-fluid">
+    <div class= "row">
+        <div class="col-md-4 p-3 ">
+           <div class="card p-3 ">
+             <h2 class="text-center">Add Food Truck Timings</h2>
+            <form action="add_truck_timings_action" onsubmit="return add_timings()">
+                <div class="form-group mt-3">
+                    <label>From Time</label>
+                    <input type="time" name="from_time"  id="from_time" class="form-control " placeholder="Enter From Time">
+                </div>
+                 <div class="form-group mt-3">
+                    <label>To Time</label>
+                    <input type="time" name="to_time"  id="to_time" class="form-control " placeholder="Enter To Time">
+                </div>
+                 <div class="form-group mt-3">
+                    <label>Date</label>
+                    <input type="date" name="date1"  id="date1" class="form-control " placeholder="Enter date ">
+                </div>
+                 <div class="form-group mt-3">
+                    <label>Location</label>
+                    <input type="text" name="location"  id="location" class="form-control " placeholder="Enter Location Name">
+                </div>
+                <div>
+                    <input type="submit" value="Add Timings" class="btn btn-info mt-3 w-100">
+                </div>
+                <div id="message">
+                </div>
+             </form>
+           </div>
+        </div>
+        <div class="col-md-8 p-3 ">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <h2 class="text-center">Truck Timings</h2>
+                </div>
+                <div class="col-md-3">
+                    <input type="date" name="date" id="date" onchange="get_timings()"  class="form-control">
+                </div>
+            </div>
+             <div id="timings" class="mt-3"></div>
+        </div>
+    </div>
+</div>
+
+
+
+

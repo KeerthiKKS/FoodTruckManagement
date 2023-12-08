@@ -1,0 +1,24 @@
+{% if session['role']=='food_truck' %}
+  {% include "fhead.html" %}
+{% else %}
+     {% include "chead.html" %}
+{% endif %}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <div class="text-center h3 mt-3">Reviews</div>
+            {% for review in reviews %}
+            {% set customer=get_customer_by_review_id(review[0])%}
+            <div class="card p-3 mt-3">
+                <div class="row">
+                    <div class="col-md-6">Rating: {{review[3]}}</div>
+                    <div class="col-md-6 text-end">By: {{customer[1]}}</div>
+                    <div>{{review[2]}}</div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>

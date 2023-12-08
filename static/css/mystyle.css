@@ -1,0 +1,40 @@
+*{
+    margin:0;
+    padding:0;
+}
+.home{
+    background:rgba(255,45,0,.6);
+    height:8%;
+    font-size:21px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.btn-home{
+    background-color:rgb(128,128,128);
+    width:100%;
+    font-size:18px;
+    font-weight: bold;
+    padding:8px;
+    border:none;
+}
+.my-home{
+    background:rgba(255,45,0,.6);
+    height:8%;
+    font-size:19px;
+    font-weight: bold;
+    font-style: italic;
+}
+.div1{
+    background-image:url("https://cdn.pnghd.pics/data/151/food-background-images-3.jpg");
+    background-repeat:no-repeat;
+    margin:auto;
+    height:85%;
+    width:100%;
+}
+.bg{
+    background:url("https://png.pngtree.com/background/20210716/original/pngtree-soft-pink-pastel-ink-background-picture-image_1344872.jpg");
+    height:92%;
+    width:100%;
+}
+

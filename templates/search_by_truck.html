@@ -1,0 +1,53 @@
+{% if session['role']=='food_truck' %}
+  {% include "fhead.html" %}
+{% else %}
+     {% include "chead.html" %}
+{% endif %}
+<script>
+    $(document).ready(function(){
+        $("#search_btn").on("click",function(){
+            let food_truck_id = $("#food_truck_id").val();
+            let category_id = $("#category_id").val();
+            let food_item_name =  $("#food_item_name").val();
+            let url="http://127.0.0.1:5000/get_food_by_truck_category_food_name?category_id="+category_id+"&food_item_name="+food_item_name;
+            $.get(url,function(data,status){
+                $("#food_details").html(data)
+            })
+        })
+       $("#food_truck_id").on("change",function(){
+            let food_truck_id = $("#food_truck_id").val();
+            let url = "http://127.0.0.1:5000/get_categories_by_food_truck_id?food_truck_id="+food_truck_id;
+            $.get(url,function(data,status){
+                $("#category_id").html(data)
+            })
+       })
+    })
+</script>
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-md-3 mt-3">
+            <select name="food_truck_id"   id="food_truck_id" class="form-control" required >
+                <option value="">Choose Food Truck</option>
+                {% for food_truck in food_trucks: %}
+                 <option value="{{food_truck[0]}}">{{food_truck[6]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 mt-3">
+            <select name="category_id"   id="category_id" class="form-control" required>
+                <option value="">Choose Category</option>
+                {% for category in categories: %}
+                 <option value="{{category[0]}}">{{category[1]}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="col-md-3 mt-3">
+            <input type="text"  id="food_item_name" name="food_item_name" class="form-control" placeholder="choose food">
+        </div>
+        <div class="col-md-3 mt-3">
+            <input type="submit" value="Search" class="btn btn-primary w-100 form-control" id="search_btn">
+        </div>
+    </div>
+    <div id="food_details">
+    </div>
+</div>

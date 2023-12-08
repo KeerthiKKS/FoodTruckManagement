@@ -1,0 +1,112 @@
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    function increment(food_item_id){
+        let quantity = $("#quantity"+food_item_id).val();
+        console.log(quantity)
+            quantity = parseInt(quantity)
+            quantity = quantity + 1;
+            $("#quantity"+food_item_id).val(quantity)
+    }
+    function decrement(food_item_id){
+         let quantity = $("#quantity"+food_item_id).val();
+          quantity = parseInt(quantity)
+          if(quantity>1){
+            quantity = quantity - 1;
+            $("#quantity"+food_item_id).val(quantity)
+          }
+    }
+
+</script>
+
+<div class="container-fluid">
+    <div class="row">
+         {% for food_item in food_items: %}
+          {% set category=get_categories_by_category_id(food_item[5]) %}
+            {% set food_truck_id=get_food_truck_id_by_category_id(food_item[5])%}
+            {% set food_truck=get_food_trucks_by_food_truck_id(category[2])%}
+            {% set truck_timings=get_truck_timings_by_food_truck_id(category[2])%}
+            {% set rating = get_rating_by_customer_order_item_id(food_item[0])%}
+            <div class="col-md-3">
+                <div class="card p-3 mt-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="h3">{{food_item[1]}}</div>
+                             <div>$ {{food_item[2]}}</div>
+                             <div>{{food_item[3]}} {{food_item[4]}}</div>
+                             <div>{{food_item[7]}}</div>
+                             <div>{{category[1]}}</div>
+                            <div>
+                                {% if rating == None %}
+                                   No Rating
+                                {% else %}
+                                Rating:<a href="view_reviews?food_item_id={{food_item[0]}}">{{rating}}</a>
+                                {% endif %}
+                            </div>
+                            <div class="offcanvas offcanvas-bottom" id="demo{{food_item[1]}}">
+                               <div class="offcanvas-header">
+                                    <h2 class="offcanvas-title">{{food_item[1]}}({{food_truck[6]}}) </h2>
+                                    <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+                               </div>
+                               <div class="offcanvas-body">
+                                    <table class="table table-bordered">
+                                        <h3>Truck Timings</h3>
+                                        <thead>
+                                            <tr>
+                                                <th>From Time</th>
+                                                <th>To Time</th>
+                                                <th>Location</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% for truck_timing in truck_timings %}
+                                                <tr>
+                                                    <th>{{truck_timing[1]}}</th>
+                                                    <th>{{truck_timing[2]}}</th>
+                                                    <th>{{truck_timing[4]}}</th>
+                                                </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                                <div class="container-fluid mt-3">
+                                    <button class="btn btn-success" type="button" data-bs-toggle="offcanvas" data-bs-target="#demo{{food_item[1]}}">
+                                       {{food_truck[6]}}
+                                    </button>
+                                </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div>
+                                <img src="../static/food_items/{{food_item[6]}}" style="height:130px;width:120px">
+                            </div>
+                        </div>
+                        {% if session['role']=='customer' %}
+                        <form action="add_to_cart">
+                            <input type="hidden" name="food_item_id" value="{{food_item[0]}}">
+                             <div class="row mt-2">
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <label class="btn btn-light w-100" onclick="decrement('{{food_item[0]}}')">-</label>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <input type="text" name="quantity"   class="form-control text-center" value="1" id="quantity{{food_item[0]}}" readonly>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <label class="btn btn-light w-100"  onclick="increment('{{food_item[0]}}')">+</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4 text-center">
+                                      <input type="submit" value="+ADD" class="btn btn-primary">
+                                    </div>
+                             </div>
+                         </form>
+                        {% endif %}
+                        <div>{{food_item[8]}}</div>
+                    </div>
+                </div>
+            </div>
+         {% endfor %}
+    </div>
+</div>

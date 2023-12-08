@@ -1,0 +1,101 @@
+{% include "head.html" %}
+<script>
+    $(document).ready(function(){
+       $("#my-form").on("submit",function(e){
+          validate(e)
+       });
+    });
+    function validate(e){
+
+        let  letters = /^[A-Za-z]+$/;
+        let name = $("#name").val();
+         if(name.length<=4){
+            $("#name-msg").text("Length should be graterthan 4 alphabets")
+            e.preventDefault();
+        }else if(!name.match(letters)){
+            $("#name-msg").text("Name should containes only alphabets")
+            e.preventDefault();
+        }else{
+            $("#name-msg").text("")
+        }
+
+        let mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+        let email = $("#email").val()
+        if(email.match(mailformat)){
+            $("#email-msg").text("")
+        }else{
+            $("#email-msg").text("Invalid email address")
+            e.preventDefault()
+        }
+        var passw = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+        let password = $("#password").val();
+            if(password.match(passw)){
+                $("#password-msg").text("")
+            }else{
+                $("#password-msg").text("password contains must be 1 capital & small letters & 1 special char & numbers")
+                e.preventDefault()
+            }
+
+        let phoneno = /^\d{10}$/;
+        let phone = $("#phone").val()
+        if(phone.match(phoneno)){
+            $("#phone-msg").text("")
+        }else{
+            $("#phone-msg").text("phone number should be 10 numbers")
+            e.preventDefault()
+        }
+    }
+</script>
+<div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 p-3 "></div>
+            <div class="col-md-4 p-3 ">
+                <div class="card p-3 ">
+                <h2 class="text-center">New Customer Registration</h2>
+                <form action="customer_registration_action" method="post" id="my-form">
+                     <div class="form-group mt-3">
+                         <label>Name</label>
+                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name" required>
+                         <label id="name-msg" style="color:red"></label>
+                     </div>
+                    <div class="form-group mt-3">
+                         <label>Email</label>
+                         <input type="email" name="email" id="email" class="form-control" placeholder="Enter Email" required>
+                        <label id="email-msg" style="color:red"></label>
+
+                     </div>
+                    <div class="form-group mt-3">
+                         <label>Password</label>
+                         <input type="password" name="password" id="password" class="form-control" placeholder="Enter password" required>
+                        <label id="password-msg" style="color:red"></label>
+
+                     </div>
+                    <div class="form-group mt-3">
+                         <label>phone</label>
+                         <input type="number" name="phone" id="phone" class="form-control" placeholder="Enter Phone Number" required>
+                        <label id="phone-msg" style="color:red"></label>
+
+                     </div>
+                    <div class="form-control mt-3">
+                        <label>Gender</label>&nbsp;
+                        <input type="radio" name="gender"  value="Male" id="gender">&nbsp;<label for="gender">Male</label>
+                        <input type="radio" name="gender"  value="Female" id="gender2">&nbsp;<label for="gender2">Female</label>
+                    </div>
+                    <div class="form-control mt-3">
+                        <label>Address</label>
+                        <textarea id="address" name="address"  class="form-control" required ></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" value="Register" class="btn-home">
+                    </div>
+                     <div class="mt-3">
+                         <label>Already has account ?</label>
+                        <a href="/customer_login">Login Here</a>
+                     </div>
+                </form>
+            </div>
+            </div>
+             <div class="col-md-4 p-3 "></div>
+
+    </div>
+</div>

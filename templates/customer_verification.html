@@ -1,0 +1,33 @@
+{% include "head.html" %}
+<script>
+    function validate(){
+        let otp=document.getElementById("otp").value
+        let otp2=document.getElementById("otp2").value
+        if(otp!=otp2)
+        {
+          alert("Invalid otp")
+          return false
+        }
+        return true
+    }
+</script>
+<div class="row">
+    <div class="col-md-4"></div>
+     <div class="col-md-4">
+         <div class="card p-3 mt-5">
+             <form action="customer_verification" onsubmit="return validate()" method="post">
+                 <div class="text-center mt-3 h3">Email Verification</div>
+                <input type="hidden" name="customer_id" value="{{customer_id}}">
+                <input type="hidden" name="otp" id="otp"  value="{{otp}}">
+                <div class="mt-3" >
+                    <label>OTP(You receive to your email)</label>
+                    <input type="number" name="otp2" id="otp2" class="form-control" placeholder="Enter otp number">
+                </div>
+                <div class="mt-3">
+                    <input type="submit" value="verify" class="btn-home">
+                </div>
+             </form>
+         </div>
+     </div>
+     <div class="col-md-4"></div>
+</div>

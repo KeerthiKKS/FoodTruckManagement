@@ -1,0 +1,20 @@
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>From Time</th>
+            <th>To time</th>
+            <th>Date</th>
+            <th>Location</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for timing in timings %}
+            <tr>
+                <td>{{timing[1]}}</td>
+                <td>{{timing[2]}}</td>
+                <td>{{timing[3]}}</td>
+                <td>{{timing[4]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

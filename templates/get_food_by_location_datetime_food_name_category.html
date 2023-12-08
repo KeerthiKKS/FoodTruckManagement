@@ -1,0 +1,44 @@
+{% if session['role']=='food_truck' %}
+  {% include "fhead.html" %}
+{% else %}
+     {% include "chead.html" %}
+{% endif %}
+<script>
+    $(document).ready(function(){
+        $("#search").on("click",function(){
+             let food_item_name = $("#food_item_name").val();
+             let location_id = $("#location_id").val();
+             let datetime = $("#datetime").val();
+             let url = "http://127.0.0.1:5000/get_food_by_location_datetime_food_name_category?food_item_name="+food_item_name+"&location_id="+location_id+"&datetime="+datetime;
+             $.get(url,function(data,status){
+                 $("#food_details").html(data)
+             })
+        })
+    })
+</script>
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-md-3 mt-3">
+            <label>Choose Locations</label>
+            <input list="location" name="location_id" id="location_id" class="form-control" placeholder="Choose Locations">
+            <datalist id="location">
+                {% for location in locations: %}
+                   <option value="{{location[0]}}">{{location[1]}}</option>
+                {% endfor %}
+            </datalist>
+        </div>
+        <div class="col-md-3 mt-3">
+            <label>Choose Date Time</label>
+            <input type="datetime-local" name="datetime" id="datetime" class="form-control">
+        </div>
+        <div class="col-md-3 mt-3">
+            <label>Choose food</label>
+            <input type="text"  id="food_item_name" name="food_item_name" class="form-control" placeholder="search food name,category">
+        </div>
+        <div class="col-md-3 mt-3">
+            <label>Search Here</label>
+            <input type="submit" value="Search" class="btn btn-primary w-100 form-control" id="search">
+        </div>
+    </div>
+    <div id="food_details"></div>
+</div>

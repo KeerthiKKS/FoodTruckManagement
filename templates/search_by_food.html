@@ -1,0 +1,29 @@
+{% if session['role']=='food_truck' %}
+  {% include "fhead.html" %}
+{% else %}
+     {% include "chead.html" %}
+{% endif %}
+<script>
+    $(document).ready(function(){
+        $("#keyword").on("keyup",function(){
+            let keyword = $("#keyword").val();
+            let url="http://127.0.0.1:5000/get_food?keyword="+keyword;
+            $.get(url,function(data,status){
+                $("#food_details").html(data)
+            })
+        })
+    })
+</script>
+
+<div class="container-fluid bg">
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 mt-3">
+            <div class="h5">Search Here</div>
+            <input type="text"  id="keyword" name="keyword" class="form-control" placeholder="search food name,category">
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div id="food_details">
+    </div>
+</div>
