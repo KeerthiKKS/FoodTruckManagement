@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = "lucky"
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 APP_ROOT = APP_ROOT + "/static/"
-conn = pymysql.connect(host="localhost", user="root", password="root", db="food_truck")
+conn = pymysql.connect(host="localhost", user="root", password="Keerthi123", db="food_truck")
 cursor = conn.cursor()
 
 
