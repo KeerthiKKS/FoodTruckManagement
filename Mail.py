@@ -1,4 +1,4 @@
-# pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
+#pip install --upgrade google-api-python-client google-auth-httplib2 google-auth-oauthlib
 from Google import Create_Service
 import base64
 from email.mime.multipart import MIMEMultipart
@@ -20,4 +20,4 @@ def send_email(subject,message,to):
     message = service.users().messages().send(userId='me', body={'raw': raw_string}).execute()
     print(message)
 
-# send_email("hi","hello","sravanibadugu679@gmail.com")
+#send_email("hi","hello","keerthikks24@gmail.com")

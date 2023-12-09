@@ -118,7 +118,7 @@
                                 {% set is_not_reviewed = is_customer_is_not_reviews(customer_order_item[0])%}
                                     {% if is_not_reviewed %}
                                     <td>
-                                        <a href="/give_review?customer_order_item_id={{customer_order_item[0]}}">Review</a>
+                                        <a href="/give_review?customer_order_item_id={{customer_order_item[0]}}" class="btn btn-success">Review</a>
                                     </td>
                                     {% endif %}
                                 {% endif %}

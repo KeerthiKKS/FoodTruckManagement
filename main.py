@@ -176,6 +176,7 @@ def add_food_items_action():
         conn.commit()
         return render_template("fmsg.html", message="Food Item Added Successfully")
     except Exception as e:
+        print(e)
         return render_template("fmsg.html", message="invalid Food Item Name")
 
 

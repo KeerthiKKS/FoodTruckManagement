@@ -29,7 +29,7 @@
             <select name="food_truck_id"   id="food_truck_id" class="form-control" required >
                 <option value="">Choose Food Truck</option>
                 {% for food_truck in food_trucks: %}
-                 <option value="{{food_truck[0]}}">{{food_truck[6]}}</option>
+                 <option value="{{food_truck[0]}}">{{food_truck[1]}}</option>
                 {% endfor %}
             </select>
         </div>
